@@ -4,6 +4,46 @@
 	<meta charset="UTF-8">
 	<title>validation</title>
 	<script type="text/javascript">
+
+
+	function showError(container, errorMessage) {
+		container.ClassName ="error";
+		var msgElem = document.createElement('span');
+		msgElem.className = "error-message";
+		msgElem.innerHTML = errorMessage;
+		container.appendChild(msgElem);
+	}
+	function resetError (container) {
+		container.className = '';
+		if (container.lastChild.className == "error-message") {
+			container.removeChild(container.lastChild);
+		}
+	}
+
+	function validateForm(form) {
+		var form1 = document.forms.shape.elements;
+
+		resetError(form1.login.parentNode);
+		if(!form1.login.value) {
+			showError(form1.login.parentNode, 'Введите Логин');
+		}
+
+		resetError(form1.pass.parentNode);
+		if(!form1.pass.value) {
+			showError(form1.pass.parentNode, 'Введите пароль');
+		} else if(form1.pass.value != form1.pass2.value) {
+			showError(form1.pass.parentNode, 'Пароли не совпадают')
+		}
+
+		resetError(form1.where.parentNode);
+		if(!form1.where.value) {
+			showError(form1.where.parentNode, 'Кому адрессовано');
+		}
+		resetError(form1.message.parentNode);
+		if(!form1.message.value) {
+			showError(form1.message.parentNode, 'Введите текст');
+		}
+	}
 		
 	</script>
 	<style type="text/css">
@@ -11,22 +51,29 @@
 			float: left;
 			width: 150px
 		}
+		.error input,
+    	.error textarea {
+     		 border: 1px solid red;
+    	}
+    	.error {
+      		color: red;
+		}
 	</style>
 </head>
 <body>
 	<div class="wrapper">
-		<form action="">
+		<form name="shape">
 			<label>
 				<span>Логин</span>
 				<input type="text" name="login">
 			</label><br><br>
 			<label>
 				<span>Ваш пароль</span>
-				<input type="text" name="pass">
+				<input type="password" name="pass">
 			</label><br><br>
 			<label>
 				<span>Повторите пароль</span>
-				<input type="text" name="repeatPass">
+				<input type="password" name="pass2">
 			</label><br><br>
 			<label>
 				<span>Куда</span>
@@ -34,9 +81,9 @@
 			</label><br><br>
 			<label>
 				<span>Сообщение</span><br>
-				<textarea name="" id="" cols="30" rows="10"></textarea>
+				<textarea name="message" id="" cols="30" rows="10"></textarea>
 			</label><br><br>
-			<input type="submit" value="проверить">
+			<input type="button" onclick="validateForm(this.form)" value="проверить"/>
 
 		</form>
 	</div>
