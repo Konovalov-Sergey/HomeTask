@@ -10,9 +10,10 @@ window.onload = function() {
 	var patternName = /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u;
 	var patternMail = /^[\w-\.]+@[\w-]+\.[a-z]{2,3}$/i
 	var patternTel = /\d{3}\ \d{3} \d{2} \d{2}/;
+	var mass = document.forms.form1.elements
 
-	document.forms[0].elements[0].onchange = function() {
-		var myName = document.forms[0].elements[0].value;
+	mass.name.onchange = function() {
+		var myName = mass.name.value;
 		var res = patternName.test(myName);
 
 		if (res) {
@@ -25,8 +26,8 @@ window.onload = function() {
 		return res;
 	}
 
-	document.forms[0].elements[1].onchange = function() {
-		var myAge = document.forms[0].elements[1].value;
+	mass.age.onchange = function() {
+		var myAge = mass.age.value;
 		var res = patternAge.test(myAge);
 
 		if (res) {
@@ -37,8 +38,8 @@ window.onload = function() {
 		document.getElementById("output").innerHTML = message;
 		return res;
 	}
-	document.forms[0].elements[2].onchange = function() {
-		var myMail = document.forms[0].elements[2].value;
+	mass.mail.onchange = function() {
+		var myMail = mass.mail.value;
 		var res = patternMail.test(myMail);
 
 		if (res) {
@@ -49,8 +50,8 @@ window.onload = function() {
 		document.getElementById("output").innerHTML = message;
 		return res;
 	}
-	document.forms[0].elements[3].onchange = function() {
-		var myTel = document.forms[0].elements[3].value;
+	mass.tel.onchange = function() {
+		var myTel = mass.tel.value;
 		var res = patternTel.test(myTel);
 
 		if (res) {
@@ -75,7 +76,7 @@ window.onload = function() {
 
 </head>
 <body>
-	<form>
+	<form name="form1">
 		<label>
 			<span>Name</span>
 			<input type="text" name="name" placeholder="Sergey Konovalov" value="">
