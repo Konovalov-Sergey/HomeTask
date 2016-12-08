@@ -1,0 +1,68 @@
+@font-face {
+	font-family: Roboto Light;
+	src: url(Roboto light.ttf);
+}
+@font-face {
+	font-family: Roboto Reqular;
+	src: url(Roboto reqular.ttf);
+}
+@font-face {
+	font-family: Lobster;
+	src: url(Lobster.ttf);
+}
+.RobotoLight {
+	font-family: Roboto Light;
+}
+.RobotoReqular {
+	font-family: Roboto Reqular;
+}
+.Lobster {
+	font-family: Lobster;
+}
+.Container {
+	width: 520px;
+	height: 260px;
+	border: 1px solid black;
+	border-radius: 15px;
+	margin-left: 100px;
+}
+.LeftTop {
+	width: 75px;
+	height: 55px;
+	border: 1px solid black;
+	border-radius: 15px;
+}
+.RightMiddle {
+	float: right;
+	width: 240px;
+	height: 150px;
+	border: 1px solid black;
+	border-radius: 15px;
+}
+.Inside {
+	width: 55px;
+	height: 55px;
+	border: 1px solid black;
+	margin-left: 55px;
+	margin-top: 37px;
+}
+table, th, td {
+	border: 1px solid black;
+}
+.ul,.ol {
+	height: 150px;
+	float: left;
+	border: 2px solid gray;
+	margin: 20px 10px;
+	padding: 10px;
+	overflow: auto;
+
+}
+div.wrap {	
+	width: 300px;
+	border-radius: 10px;
+	border: 1px solid black;
+}
+.clear {
+	clear: both;
+}
