@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>drag</title>
+	<script type="text/javascript">
+		(function(){
+			var widthE = 50,
+				widthS = 500;
+            window.addEventListener("load", init, false);
+
+            function init() {
+                var elem = document.getElementById("elem");
+                elem.addEventListener("mousedown", function (e) {
+                    drag(this, e);
+                })
+                document.getElementById('screen').addEventListener('mousemove', coord, false);
+            }
+            function coord(){
+            	
+
+            	var screenNew = document.getElementById("screen");
+            	var screenX = screenNew.offsetLeft,
+            		screenY = screenNew.offsetTop;
+
+            	var elemScr = document.getElementById("elem");
+            	var elemX = elemScr.offsetLeft,
+            		elemY = elemScr.offsetTop;
+
+            	if (elemX <= screenX || elemY <= screenY || (elemX + widthE) >= (screenX + widthS) || (elemY + widthE) >= (screenY + widthS)) {
+            		screenNew.classList.add('error');
+            		stop();
+            	} else {
+            		screenNew.classList.remove('error');
+            	}
+            	function stop() {
+            		if (elemX <= screenX) elemScr.style.left = screenX + "px";
+                    if (elemY <= screenY) elemScr.style.top = screenY + "px";
+                    if ((elemX + widthE) >= (screenX + widthS)) elemScr.style.left = (screenX + (widthS - widthE)) + "px";
+                    if ((elemY + widthE) >= (screenY + widthS)) elemScr.style.top = (screenY + (widthS - widthE)) + "px"; 
+            	}
+            	console.log(elemX, elemY, screenX, screenY)
+            }
+
+            function drag(elementToDrag, event) {
+                
+                var startX = event.clientX,
+                    startY = event.clientY;
+
+                
+                var origX = elementToDrag.offsetLeft,
+                    origY = elementToDrag.offsetTop;
+
+               
+                var deltaX = startX - origX,
+                    deltaY = startY - origY;
+
+                
+                document.addEventListener("mousemove", moveHandler, true);
+                document.addEventListener("mouseup", upHandler, true);
+
+                function moveHandler(e) {
+                    if (!e) e = window.event;
+
+                   
+                    elementToDrag.style.left = (e.clientX - deltaX) + "px";
+                    elementToDrag.style.top = (e.clientY - deltaY) + "px";
+                }
+
+                function upHandler(e) {
+                    if (!e) e = window.event; 
+
+                    document.removeEventListener("mouseup", upHandler, true);
+                    document.removeEventListener("mousemove", moveHandler, true);
+                }
+            }
+        })()
+	</script>
+	<style type="text/css">
+		#screen {
+			
+			width: 500px;
+			height: 500px;
+			background: lightblue;
+			border: 2px solid black;
+			
+		}
+		#elem {
+			position: absolute;
+			top: 150px;
+			left: 150px;
+			width: 50px;
+			height: 50px;
+			background: yellow;
+			z-index: 10;
+		}
+		#screen.error {
+			border: 2px solid red;
+		}
+	</style>
+</head>
+<body>
+	<div id="screen" >
+		<div id="elem"></div>
+	</div>
+</body>
+</html>
