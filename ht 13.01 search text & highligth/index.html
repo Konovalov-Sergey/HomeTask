@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search').keyup(function() {
+                searchHighlight($(this).val());
+            })
+        });
+        function searchHighlight(searchText) {
+            if (searchText) {
+                var content = $('p').text();
+                var searchExp = new RegExp(searchText, "ig");
+                var matches = content.match(searchExp);
+                if (matches) {
+                    $('p').html(content.replace(searchExp, function(match){
+                        return "<span class='highLight'>" + match + "</span>";
+                    }))
+                } else {
+                    $('.highLight').removeClass('highLight');
+                }
+            } else {
+                $('.highLight').removeClass('highLight');
+            }
+        };
+    </script>
+    <style type="text/css">
+        .highLight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <input type="text" id="search">
+    </form>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod nemo doloribus, magnam qui vitae iure. Amet nam, a officia. Quod a possimus eveniet cum, atque vero eos minus est magni?</p>
+</body>
+</html>
