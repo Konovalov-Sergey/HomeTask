@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To do</title>
+    <script src="angular.js"></script>
+    <script src="app.js"></script>
+    <script src="controller.js"></script>
+    <link rel="stylesheet" type="text/css" href="app.css">
+</head>
+<body ng-app="todoApp" ng-controller="todoController">
+<section id="container">
+    
+    <h1>What needs to be done?</h1>
+    
+      <form ng-submit="addTodo()">
+          <div>
+              <input type="text" ng-model="newTask" >
+              <button type="submit">Add Task</button>
+          </div>
+      </form>
+
+      <table id="taskList">
+        <thead>
+        	<tr>
+        	  <!-- <th>Done</th> -->
+        	  <th>Tasks</th>
+        	</tr>
+        </thead>
+
+        <tbody ng-repeat="task in taskList">
+        	<tr ng-if='task != activeTask'>
+        	  <!-- <td ng-class="{strike: task.done}">
+        	    <input type="checkbox" ng-model="task.done">
+        	  </td> -->
+        	  <td>
+        	    {{task.description}}
+        	  </td>
+        	  <td>
+         	    <button ng-click="deleteTodo(task)">Del</button>
+        	    <button ng-click="edit(task)">Edit</button>
+        	  </td>
+        	</tr>
+        	<tr ng-if='task == activeTask'>
+        		<!-- <td></td> -->
+        		<td>
+        	   		<input type="text" ng-model='task.description'>
+        	   	</td>
+        	    <td>
+        	  		<button ng-click="update(task)">Update</button>
+        		</td>
+        	</tr>
+        </tbody>
+      </table>
+    
+      
+</section>  
+</body>
+</html>
