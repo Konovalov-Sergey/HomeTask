@@ -22,7 +22,7 @@ angular.module('todoApp.controller',[])
 		};
 
 		$scope.update = function(task) {
-			$scope.activeTask = null;
+			$scope.activeTask = task.description;
 		};
 
 	}]);
