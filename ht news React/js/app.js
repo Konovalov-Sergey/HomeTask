@@ -83,13 +83,88 @@ var News = React.createClass({
 		); 
 	}
 });
-
-var App = React.createClass ({
+var Add = React.createClass({
+	getInitialState: function() {
+		return {
+			agreeNotChecked: true,
+    		authorIsEmpty: true,
+    		textIsEmpty: true
+		};
+	},
+	componentDidMount: function() {
+		ReactDOM.findDOMNode(this.refs.author).focus();
+	},
+	onBtnClickHandler: function(e) {
+		e.preventDefault();
+		var author = ReactDOM.findDOMNode(this.refs.author).value;
+		var text = ReactDOM.findDOMNode(this.refs.text).value;
+		alert(author + '\n' + text);
+	},
+	onCheckRuleClick: function(e) {
+		this.setState({agreeNotChecked: !this.state.agreeNotChecked});
+	},
+	onFieldChange: function(fieldName, e) {
+		if (e.target.value.trim().length > 0) {
+			this.setState({[''+fieldName]:false})
+		} else {
+			this.setState({[''+fieldName]:true})
+		}
+	},
 	render: function() {
+		var agreeNotChecked = this.state.agreeNotChecked,
+        	authorIsEmpty = this.state.authorIsEmpty,
+        	textIsEmpty = this.state.textIsEmpty;
 		return (
-			<div className="app">
-				<h3> news </h3>
-				<News data={my_news} />
+			<form className='add'>
+				<input
+					type='text'
+					className='add__author'
+					onChange={this.onFieldChange.bind(this, 'authorIsEmpty')}
+					placeholder='Ваше имя'
+					ref='author'
+				/>
+				<textarea
+					className='add__text'
+					onChange={this.onFieldChange.bind(this, 'textIsEmpty')} 
+					placeholder='Текст новости'
+					ref='text'>
+				</textarea>
+				<label className='add__checkrule'>
+					<input type='checkbox' ref='checkrule' onChange={this.onCheckRuleClick}/>Я согласен с правилами
+				</label>
+				<button
+					className='add__btn'
+					onClick={this.onBtnClickHandler}
+					ref='alert_button'
+					disabled={agreeNotChecked || authorIsEmpty || textIsEmpty}
+				>
+					Показать alert
+				</button>
+			</form>
+		);
+	}
+});
+var App = React.createClass({
+	getInitialState: function() {
+    	return {
+			news: my_news
+    	};
+	},
+  	componentDidMount: function() {
+  	  /* Слушай событие "Создана новость"
+  	    если событие произошло, обнови this.state.news
+  	  */
+  	},
+	componentWillUnmount: function() {
+    /* Больше не слушай событие "Создана новость" */
+	},
+	render: function() {
+		console.log('render');
+		return (
+			<div className='app'>
+				<Add />
+				<h3>Новости</h3>
+				<News data={this.state.news} />
 			</div>
 		);
 	}
