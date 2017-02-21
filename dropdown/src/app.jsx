@@ -1,5 +1,5 @@
 var React = require('react');
-var Header = require('./header');
+var Total = require('./total');
 
 var options = {
   items: [ 
@@ -14,8 +14,7 @@ var options = {
 	'Resourses',
 	'More'
 	],
-	thumbnailData: 
-	[
+	thumbnailData: [
 		{
     	  title: 'Show Courses',
     	  number: 12,
@@ -47,5 +46,5 @@ var options = {
     ]
 };
 
-var element = React.createElement(Header, options);
+var element = React.createElement(Total, options);
 React.render(element, document.querySelector('.container'));
