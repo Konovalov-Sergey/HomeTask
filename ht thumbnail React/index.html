@@ -8,27 +8,32 @@
 	<div class="container"></div>
 </body>
 <script type="text/jsx">
+
 	var Header = React.createClass({
 		render: function() {
-			return <nav className="navbar navbar-default navbar-fixed-top">
-  				<div class="container">
-    				<ul className="nav nav-pills">
-  						<li role="presentation" className="active"><a href="#">Docs</a></li>
-  						<li role="presentation"><a href="#">Tutorial</a></li>
-  						<li role="presentation"><a href="#">Community</a></li>
-  						<li role="presentation"><a href="#">blogs</a></li>
-					</ul>
- 				</div>
-			</nav>
+			var ader = this.props.thumbnailData.map(function(item) {
+				return (<ul><li><a href="#">{...item}</a></li></ul>)
+			});
+			return (<div>
+				{this.props.head}
+				{ader}
+			</div>)
 		}
 	});
+	
 	var Badge = React.createClass({
     render: function() {
-      return <button className="btn btn-primary" type="button">
-        {this.props.title} <span className="badge">{this.props.number}</span>
+      return <button 
+		className="btn btn-primary" 
+       	type="button">
+        	{this.props.title} 
+        <span className="badge">
+        	{this.props.number}
+        </span>
       </button>
     }
 	});
+	
 	var Thumbnail = React.createClass({
     	render: function() {
       		return <div className="col-sm-6 col-md-4">
@@ -38,7 +43,10 @@
     	  		    	<h3>{this.props.header}</h3>
     	  		    	<p>{this.props.description}</p>
     	  		    	<p>
-    	  		    		<Badge title={this.props.title} number={this.props.number} />
+    	  		    		<Badge 
+    	  		    			title={this.props.title} 
+    	  		    			number={this.props.number} 
+    	  		    		/>
     	  		    	</p>
     	  		    </div>
     	  		  </div>
@@ -63,42 +71,51 @@
     render: function() {
       return <div class="wrapper">
     			<ul className="nav nav-pills">
-  					<li role="presentation" className="active"><a href="#">Docs</a></li>
-  					<li role="presentation"><a href="#">Community</a></li>
-  					<li role="presentation"><a href="#">Resourses</a></li>
-  					<li role="presentation"><a href="#">More</a></li>
+  					<li role="presentation" className="active"><a href="#">{this.props.foot}</a></li>
 				</ul>
  			</div>
 		}
 	});
 	var options = {
-    	thumbnailData:  [{
-    	  title: 'Show Courses',
-    	  number: 12,
-    	  header: 'Learn React',
-    	  description: 'React is a fantastic new front end library for rendering web pages. React is a fantastic new front end library for rendering web pages.',
-    	  imageUrl: 'https://raw.githubusercontent.com/wiki/facebook/react/react-logo-1000-transparent.png'
-    	},{
-    	  title: 'Show Courses',
-    	  number: 25,
-    	  header: 'Learn Gulp',
-    	  description: 'Gulp will speed up your development workflow.  Gulp will speed up your development workflow.  Gulp will speed up your development workflow.',
-    	  imageUrl: 'http://brunch.io/images/others/gulp.png'
-    	},{
-    	  title: 'Show Javascript',
-    	  number: 200,
-    	  header: 'Learn JS',
-    	  description: 'React is a fantastic new front end library for rendering web pages. React is a fantastic new front end library for rendering web pages.',
-    	  imageUrl: 'https://raw.githubusercontent.com/wiki/facebook/react/react-logo-1000-transparent.png'
-    	},
-    	  {
-    	    title: 'Show CSS',
-    	    number: 20,
-    	    header: 'Learn CSS',
-    	    description: 'React is a fantastic new front end library for rendering web pages. React is a fantastic new front end library for rendering web pages.',
-    	    imageUrl: 'https://raw.githubusercontent.com/wiki/facebook/react/react-logo-1000-transparent.png'
-    	  }
-    	]
+    	thumbnailData: 
+		[
+			{
+    		  title: 'Show Courses',
+    		  number: 12,
+    		  header: 'Learn React',
+    		  description: 'React is a fantastic new front end library for rendering web pages. React is a fantastic new front end library for rendering web pages.',
+    		  imageUrl: 'https://raw.githubusercontent.com/wiki/facebook/react/react-logo-1000-transparent.png'
+    		},
+			{
+    		  title: 'Show Courses',
+    		  number: 25,
+    		  header: 'Learn Gulp',
+    		  description: 'Gulp will speed up your development workflow.  Gulp will speed up your development workflow.  Gulp will speed up your development workflow.',
+    		  imageUrl: 'http://brunch.io/images/others/gulp.png'
+    		},
+			{
+    		  title: 'Show Javascript',
+    		  number: 200,
+    		  header: 'Learn JS',
+    		  description: 'React is a fantastic new front end library for rendering web pages. React is a fantastic new front end library for rendering web pages.',
+    		  imageUrl: 'https://raw.githubusercontent.com/wiki/facebook/react/react-logo-1000-transparent.png'
+    		},
+    		{
+    		  title: 'Show CSS',
+    		  number: 20,
+    		  header: 'Learn CSS',
+    		  description: 'React is a fantastic new front end library for rendering web pages. React is a fantastic new front end library for rendering web pages.',
+    		  imageUrl: 'https://raw.githubusercontent.com/wiki/facebook/react/react-logo-1000-transparent.png'
+    		}
+    	],
+		headList:
+		[
+			{
+			head: ['Docs', 'Tutorial', 'Community',  'blogs'],
+			foot: ['Docs', 'Community', 'Resourses', 'More']
+			}
+		]
+		
   	};
 
   	var element = React.createElement(ThumbnailList, options);
